@@ -1,0 +1,23 @@
+.form-control {
+  color: black;
+}
+
+.form-control:focus {
+  color: black;
+}
+
+.form-control:hover {
+  color: black;
+}
+
+.hidden {
+  display: none;
+}
+
+.tab-content {
+  height: auto !important;
+}
+
+.dd-handle {
+  background-color: slategray;
+}
