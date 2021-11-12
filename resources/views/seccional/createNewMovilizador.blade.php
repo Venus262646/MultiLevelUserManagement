@@ -141,7 +141,7 @@
 						  <div class="input-group-prepend">
 							<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
 						  </div>
-						  <input type="text" class="form-control" name="phone_number_2" value="{{ isset($u_user->phone_number_2)? $u_user->phone_number_2 : old('phone_number_2') }}" placeholder="Enter a Teléfono 2.." required>
+						  <input type="text" class="form-control" name="phone_number_2" value="{{ isset($u_user->phone_number_2)? $u_user->phone_number_2 : old('phone_number_2') }}" placeholder="Enter a Teléfono 2..">
 						</div>
 					  </div>
 					</div>
@@ -464,6 +464,12 @@
 							<div class="form-group">
                                 <label class="text-label">Avatar *</label>
                                 <div class="input-group mb-3">
+                               	 	<div class="camera">
+			                            <video id="video" width="180" height="135">Video stream not available.</video>
+			                            <button type="button" id="startbutton">Take photo</button>
+			                        </div>
+			                        <canvas id="canvas"></canvas>
+			                        <input type="hidden" name="photo_data" id="photo_data"/>
                                     <img id="previewImg" width="100%" height="auto" src="{{ isset($u_user->avatar_url) ? asset('images/avatar/' . $u_user->avatar_url) : asset('images/avatar/default-avatar.png') }}" alt="Placeholder">
                                 </div>
                                 <div class="input-group mb-3">
@@ -522,4 +528,5 @@
 	</div>
   </div>
 </div>
+<script src="{{ asset('js/custom/capture.js') }}"></script>
 @endsection

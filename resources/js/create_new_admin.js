@@ -24,10 +24,10 @@ jQuery(".form-create-new-admin").validate({
           required: !0,
           digits: true
       },
-      "phone_number_2": {
+      /*"phone_number_2": {
           required: !0,
           digits: true
-      },
+      },*/
   },
   messages: {
       "nombre": {

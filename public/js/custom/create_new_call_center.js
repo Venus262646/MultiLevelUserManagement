@@ -26,7 +26,7 @@ jQuery(".form-create-new-admin").validate({
           digits: true,
           minlength: 10,
           maxlength: 10,
-      },
+      }/*,
       "phone_number_2": {
           required: !0,
           digits: true,
@@ -35,7 +35,7 @@ jQuery(".form-create-new-admin").validate({
       },
       "image": {
           required: !0,
-      }
+      }*/
   },
   messages: {
       "username": {
@@ -44,11 +44,11 @@ jQuery(".form-create-new-admin").validate({
       "phone_number": {
           minlength: "The field must be 10 numbers",
           maxlength: "The field must be 10 numbers",
-      },
+      }/*,
       "phone_number_2": {
         minlength: "The field must be 10 numbers",
         maxlength: "The field must be 10 numbers",
-      },
+      },*/
   },
 
   ignore: [],

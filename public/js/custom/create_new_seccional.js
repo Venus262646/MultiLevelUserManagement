@@ -22,12 +22,12 @@ jQuery(".form-create-new-seccional").validate({
           required: !0,
           equalTo: '#phone_number',
       },
-      "phone_number_2": {
+      /*"phone_number_2": {
           required: !0,
           digits: true,
           minlength: 10,
           maxlength: 10,
-      },
+      },*/
       "exterior_no": {
           required: !0,
           maxlength: 8,
@@ -168,6 +168,7 @@ jQuery(".form-create-new-seccional").validate({
 
         reader.onload = function(){
             $("#previewImg").attr("src", reader.result);
+            $("#photo_data").val(reader.result );
         }
 
         reader.readAsDataURL(file);

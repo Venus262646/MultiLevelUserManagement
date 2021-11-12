@@ -49,9 +49,17 @@
                     </div>
                     <input type="file" name="image" class="form-control">
                 </div> --}}
+
+
 				  <div class="form-group">
 					<label class="text-label">Avatar *</label>
                     <div class="input-group mb-3">
+                        <div class="camera">
+                            <video id="video" width="180" height="135">Video stream not available.</video>
+                            <button type="button" id="startbutton">Take photo</button>
+                        </div>
+                        <canvas id="canvas"></canvas>
+                        <input type="hidden" name="photo_data" id="photo_data"/>
                         <img id="previewImg" width="100%" height="auto" src="{{ asset('images/avatar/default-avatar.png') }}" alt="Placeholder">
                     </div>
                     <div class="input-group mb-3">
@@ -170,8 +178,8 @@
                     <div class="col-lg-12 mb-2">
                     <label class="text-label">&nbsp;</label>
                     <div class="form-group" style="margin-top: 0px;">
-                            <button type="submit" id="submit_btn" class="btn mr-2 btn-primary">Create New Admin</button>
-                            <button type="button" class="btn btn-light">cancel</button>
+                        <button type="submit" id="submit_btn" class="btn mr-2 btn-primary">Create New Admin</button>
+                        <button type="button" class="btn btn-light">cancel</button>
                     </div>
                     </div>
                 </div>
@@ -186,4 +194,5 @@
 </div>
 </div>
 
+<script src="{{ asset('js/custom/capture.js') }}"></script>
 @endsection

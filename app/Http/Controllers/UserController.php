@@ -510,37 +510,18 @@ class UserController extends Controller {
     public function smsVerify(Request $request) {
 		$phone_number = $request->phone_number;
 
-        $aid =  "AC824b10f8fc5f9de44d230861aab75d2c";
-		$apikey = "MjasrX5Fp65uRcGBiTdXXXt7xSCQWFLA";
-		$serviceId = "MG86f6b6d78cf2a059222faf058185940c";
-		$identify = "John";
-		$secret = "XXX";
-
-		// Create access token, which we will serialize and send to the client
-		$token = new AccessToken(
-			$aid,
-			$apikey,
-			$secret,
-			3600,
-			$identify
-		);
-
-		// Create Chat grant
-		$chatGrant = new ChatGrant();
-		$chatGrant->setServiceSid($serviceId);
-
-		// Add grant to token
-		$token->addGrant($chatGrant);
-
-		// render token to string
-		$t = $token->toJWT();
-		$twilio = new Client($serviceId, $t );
-
-		$message = $twilio->messages
-                  ->create("+" . $phone_number, // to
-                           ["body" => "Hi there", "from" => "+13605161700"]
-                  );
-
+        $token = "eb0e9fd2f4b5a722ff68d909ea2d75b8";
+		$twilio_sid = "AC824b10f8fc5f9de44d230861aab75d2c";
+		$twilio_verify_sid = "VA7e2800317610bbd2ad5d9c38b418f38c";
+		$twilio = new Client($twilio_sid, $token);
+		$verification = $twilio->verify->v2->services($twilio_verify_sid)
+            ->verifications
+            ->create("+1" . $phone_number, "sms");
+		if ($verification->valid) {
+			echo "success";
+		}else{
+			echo "failed";
+		}
 		// print($message->sid);
     }
 }

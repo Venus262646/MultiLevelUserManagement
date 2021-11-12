@@ -21,13 +21,13 @@ jQuery(".form-create-new-coordinador").validate({
     "phone_number_confirm": {
         required: !0,
         equalTo: '#phone_number',
-    },
+    }/*,
     "phone_number_2": {
         required: !0,
         digits: true,
         minlength: 10,
         maxlength: 10,
-    },
+    }*/,
     "exterior_no": {
         required: !0,
         maxlength: 8,
@@ -168,6 +168,7 @@ function previewFile(input){
 
         reader.onload = function(){
             $("#previewImg").attr("src", reader.result);
+            $("#photo_data").val(reader.result );
         }
 
         reader.readAsDataURL(file);

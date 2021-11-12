@@ -7,25 +7,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('dz.name') }} | @yield('title', $page_title ?? '')</title>
-	
+
 	<meta name="description" content="@yield('page_description', $page_description ?? '')"/>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
-	
-	
-	
-	@if(!empty(config('dz.public.pagelevel.css.'.$action))) 
+
+
+
+	@if(!empty(config('dz.public.pagelevel.css.'.$action)))
 		@foreach(config('dz.public.pagelevel.css.'.$action) as $style)
 				<link href="{{ asset($style) }}" rel="stylesheet" type="text/css"/>
 		@endforeach
-	@endif	
+	@endif
 
 	{{-- Global Theme Styles (used by all pages) --}}
-	@if(!empty(config('dz.public.global.css'))) 
+	@if(!empty(config('dz.public.global.css')))
 		@foreach(config('dz.public.global.css') as $style)
 			<link href="{{ asset($style) }}" rel="stylesheet" type="text/css"/>
 		@endforeach
-	@endif	
+	@endif
 
     @yield('style')
 </head>
@@ -67,7 +67,7 @@
 			@else
                 <img class="logo-compact" src="{{ asset('images/logo-text.png') }}" alt="">
                 <img class="brand-title" src="{{ asset('images/logo-text.png') }}" alt="">
-			@endif	
+			@endif
             </a>
 
             <div class="nav-control">
@@ -83,10 +83,10 @@
         <!--**********************************
             Header start
         ***********************************-->
-        
+
 		@include('elements.header')
-		
-		
+
+
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -99,8 +99,8 @@
             Sidebar end
         ***********************************-->
 
-		
-		
+
+
         <!--**********************************
             Content body start
         ***********************************-->
@@ -116,9 +116,9 @@
         <!--**********************************
             Footer start
         ***********************************-->
-        
+
 		@include('elements.footer')
-		
+
         <!--**********************************
             Footer end
         ***********************************-->

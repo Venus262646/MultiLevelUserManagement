@@ -56,7 +56,7 @@ class SuperAdminController extends Controller {
 		return view( 'superadmin.dashboard', compact( 'page_title', 'page_description', 'action', 'logo', 'logoText', 'active', 'event_class', 'button_class', 'directs', 'users_count' ) );
 	}
 
-	public function createNewAdmin() {
+	public function createNewAdmin() { 
 		if ( ! Auth::user() || Auth::user()->level != 'SuperAdmin' ) {
 			return redirect( '/dashboard' );
 		}

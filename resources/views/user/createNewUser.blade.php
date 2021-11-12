@@ -145,7 +145,7 @@
 						  <div class="input-group-prepend">
 							<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
 						  </div>
-						  <input type="text" class="form-control" name="phone_number_2" value="{{ isset($u_user->phone_number_2)? $u_user->phone_number_2 : old('phone_number_2') }}" placeholder="Enter a Teléfono 2.." required>
+						  <input type="text" class="form-control" name="phone_number_2" value="{{ isset($u_user->phone_number_2)? $u_user->phone_number_2 : old('phone_number_2') }}" placeholder="Enter a Teléfono 2..">
 						</div>
 					  </div>
 					</div>

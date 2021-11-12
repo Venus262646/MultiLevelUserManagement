@@ -422,8 +422,12 @@ $(document).ready(function(){
 				phone_number : $("#phone_number").val()
             },
             url : "/sms-verify",
-            success: function() {
-                alert('verfied!');
+            success: function(data) { 
+				if (data = "success"){
+					alert('verfied!');
+				}else{
+					alert('failed!');
+				}
             }
         });
     });
