@@ -143,7 +143,7 @@
               </svg>
               Running
               <svg class="ml-2" width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 0.999999L7 7L13 1" stroke="#0B2A97" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1 0.999999L7 7L13 1" stroke="#50B948" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
@@ -222,7 +222,7 @@
         },
         stroke: {
           width: [5],
-		  colors:['#0B2A97'],
+		  colors:['#50B948'],
 		  curve: 'smooth'
         },
         legend: {
@@ -234,7 +234,7 @@
         },
         markers: {
 		  strokeWidth: [8],
-		  strokeColors: ['#0B2A97'],
+		  strokeColors: ['#50B948'],
 		  border:0,
 		  colors:['#fff'],
           hover: {
@@ -266,11 +266,11 @@
 		  },
 		},
 		fill: {
-			colors:['#0B2A97'],
+			colors:['#50B948'],
 			type:'solid',
 			opacity: 0
 		},
-		colors:['#0B2A97'],
+		colors:['#50B948'],
         grid: {
           borderColor: '#f1f1f1',
 		  xaxis: {
@@ -296,7 +296,7 @@
 				},
 				markers: {
 				  strokeWidth: [4],
-				  strokeColors: ['#0B2A97'],
+				  strokeColors: ['#50B948'],
 				  border:0,
 				  colors:['#fff'],
 				  hover: {
@@ -305,7 +305,7 @@
 				},
 				stroke: {
 				  width: [6],
-				  colors:['#0B2A97'],
+				  colors:['#50B948'],
 				  curve: 'smooth'
 				},
 			}

@@ -185,7 +185,7 @@
                 <div class="text-center">
                   <span class="d-block">
                     <svg width="19" height="9" viewBox="0 0 18 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M9 0L0 9H18L9 0Z" fill="#0B2A97"></path>
+                      <path d="M9 0L0 9H18L9 0Z" fill="#50B948"></path>
                     </svg>
                   </span>
                   <span class="d-block fs-16 text-black font-w600">#1</span>
@@ -200,7 +200,7 @@
                 <div class="text-center">
                   <span class="d-block">
                     <svg width="19" height="9" viewBox="0 0 18 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M9 0L0 9H18L9 0Z" fill="#0B2A97"></path>
+                      <path d="M9 0L0 9H18L9 0Z" fill="#50B948"></path>
                     </svg>
                   </span>
                   <span class="d-block fs-16 text-black font-w600">#2</span>
@@ -230,7 +230,7 @@
                 <div class="text-center">
                   <span class="d-block">
                     <svg width="19" height="9" viewBox="0 0 18 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M9 0L0 9H18L9 0Z" fill="#0B2A97"></path>
+                      <path d="M9 0L0 9H18L9 0Z" fill="#50B948"></path>
                     </svg>
                   </span>
                   <span class="d-block fs-16 text-black font-w600">#4</span>
