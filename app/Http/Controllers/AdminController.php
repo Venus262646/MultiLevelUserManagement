@@ -16,7 +16,7 @@ class AdminController extends Controller {
 	public function __construct() {
 	}
 
-	public function index() { 
+	public function index() {
 		if ( ! Auth::user() || Auth::user()->level != 'Admin' ) {
 			return redirect( '/dashboard' );
 		}
@@ -106,7 +106,7 @@ class AdminController extends Controller {
 			}
 
 			$avatar_url = time() . ".jpg";
-			$path = 'images/avatar/' . $avatar_url; 
+			$path = 'images/avatar/' . $avatar_url;
 			$img = $request->input('photo_data');
 			if ($img != null ){
 				$img = str_replace('data:image/png;base64,', '', $request->input('photo_data'));
@@ -117,7 +117,7 @@ class AdminController extends Controller {
 				$angle = 0;
 				$rotate = imagerotate($source, $angle, 0); // if want to rotate the image
 				$imageSave = imagejpeg($rotate,$path,100);
-				imagedestroy($source);	
+				imagedestroy($source);
 			}
 			//$avatar_url = time() . '.' . $request->image->extension();
 			//$request->image->move( public_path( 'images/avatar' ), $avatar_url );
@@ -128,6 +128,7 @@ class AdminController extends Controller {
 			$user->avatar_url      = $avatar_url;
 			$user->email_verified_at     = now();
 			$user->save();
+            // print_r("This is Test Commit for Git Repository Changing");
 			return redirect( '/superadmin/' );
 
 		}
