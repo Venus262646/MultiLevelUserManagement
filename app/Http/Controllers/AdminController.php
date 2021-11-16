@@ -128,7 +128,6 @@ class AdminController extends Controller {
 			$user->avatar_url      = $avatar_url;
 			$user->email_verified_at     = now();
 			$user->save();
-            // print_r("This is Test Commit for Git Repository Changing");
 			return redirect( '/superadmin/' );
 
 		}
