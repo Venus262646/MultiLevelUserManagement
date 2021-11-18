@@ -17,7 +17,10 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-	return view('welcome');
+	return redirect('/dashboard');
+});
+Route::get('/index', function () {
+    return redirect('/dashboard');
 });
 
 Route::get( '/login', 'App\Http\Controllers\UserController@getLoginForm' );
@@ -40,9 +43,9 @@ Route::middleware('auth')->group(function() {
     Route::post( '/password-reset', 'App\Http\Controllers\USerController@passwordReset' );
 
     // Route::get( '/admin/createNewCoordinator/{parent_id?}', 'App\Http\Controllers\AdminController@createNewCoordinator' );
-    Route::get( '/coordinador/createNewSeccional', 'App\Http\Controllers\CoordinadorController@createNewSeccional' );
-    Route::get( '/seccional/createNewMovilizador', 'App\Http\Controllers\SeccionalController@createNewMovilizador' );
-    Route::get( '/movilizador/createNewFamiliar', 'App\Http\Controllers\MovilizadorController@createNewFamiliar' );
+    Route::get( '/coordinador/createNewSeccional/{parent_id?}', 'App\Http\Controllers\CoordinadorController@createNewSeccional' );
+    Route::get( '/seccional/createNewMovilizador/{parent_id?}', 'App\Http\Controllers\SeccionalController@createNewMovilizador' );
+    Route::get( '/movilizador/createNewFamiliar/{parent_id?}', 'App\Http\Controllers\MovilizadorController@createNewFamiliar' );
 
     Route::get( '/superadmin/editAdmin/{user_id}', 'App\Http\Controllers\SuperAdminController@editAdmin' );
     Route::get( '/admin/editCoordinador/{user_id}', 'App\Http\Controllers\AdminController@editCoordinador');

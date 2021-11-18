@@ -68,21 +68,38 @@ class CoordinadorController extends Controller
 }
 
     public function editSeccional($user_id) {
-        return $this->createNewSeccional($user_id, 0);
-        // $user = User::find($user_id);
+        $isCreate = 0;
+        $parent_id=$user_id;
 
-        // $page_title       = 'Edit New Coordinador';
-		// $page_description = 'Some description for the page';
+        $weight = config('dz.public.weight');
 
-		// $action = 'edit_coordinador';
+        if ( ! Auth::user() || $weight[Auth::user()->level] > $weight['Coordinador'] ) {
+            return redirect( '/dashboard' );
+        }
+        if ( $parent_id === 0 ) {
+            $parent_id = Auth::user()->id;
+        }
 
-        // $states        = State::all();
-		// $auto_password = Str::random( 8 );
+        $level = "Seccional";
 
-        // return view('admin.editCoordinador', compact( 'page_title', 'page_description', 'action', 'states', 'auto_password', 'user' ));
+        $states        = State::all();
+        $auto_password = Str::random( 8 );
+
+        $page_title       = $isCreate ? 'Create New ' . $level : 'Edit ' . $level;
+        $page_description = 'Some description for the page';
+
+        $action = 'edit_seccional';
+
+        $u_user = null;
+        if(!$isCreate) {
+            $u_user = User::find($parent_id);
+        }
+
+        return view( 'coordinador.createNewSeccional', compact( 'page_title', 'page_description', 'action', 'states', 'auto_password', 'parent_id', 'level', 'u_user' ) );
     }
 
   public function create(Request $request) {
+    //   return redirect()->to(app('url')->previous() . "#wizard_section_2");
     $weight = config('dz.public.weight');
 
 		if ( ! Auth::user() || ! $request->input( 'level' ) || ! ( $weight[ Auth::user()->level ] < $weight[ $request->input( 'level' ) ] ) ) {
@@ -165,7 +182,7 @@ class CoordinadorController extends Controller
 			/*$avatar_url = time() . '.' . $request->image->extension();
 			$request->image->move( public_path( 'images/avatar' ), $avatar_url );*/
 			$avatar_url = time() . ".jpg";
-			$path = 'images/avatar/' . $avatar_url; 
+			$path = 'images/avatar/' . $avatar_url;
 			$img = $request->input('photo_data');
 			if ($img != null ){
 				$img = str_replace('data:image/png;base64,', '', $request->input('photo_data'));
@@ -176,7 +193,7 @@ class CoordinadorController extends Controller
 				$angle = 0;
 				$rotate = imagerotate($source, $angle, 0); // if want to rotate the image
 				$imageSave = imagejpeg($rotate,$path,100);
-				imagedestroy($source);	
+				imagedestroy($source);
 			}
 
 
@@ -190,20 +207,21 @@ class CoordinadorController extends Controller
 
 			$from_email = Auth::user()->email;
 
-			Mail::send(
-				array( 'text' => 'mail.contact' ),
-				array(
-					'content'    => 'Your account created',
-					'name'       => $user->first_name . '  ' . $user->last_name,
-					'from_email' => $from_email,
-				),
-				function( $message ) use ( $user, $from_email ) {
-					$message->to( $user->email, $user->first_name . '  ' . $user->second_name )->subject( 'Your account created' );
-					$message->from( $from_email, $user->first_name . '  ' . $user->second_name );
-				}
-			);
+			// Mail::send(
+			// 	array( 'text' => 'mail.contact' ),
+			// 	array(
+			// 		'content'    => 'Your account created',
+			// 		'name'       => $user->first_name . '  ' . $user->last_name,
+			// 		'from_email' => $from_email,
+			// 	),
+			// 	function( $message ) use ( $user, $from_email ) {
+			// 		$message->to( $user->email, $user->first_name . '  ' . $user->second_name )->subject( 'Your account created' );
+			// 		$message->from( $from_email, $user->first_name . '  ' . $user->second_name );
+			// 	}
+			// );
+            // mail("fernando262646@gmail.com", "My subject", "msg");
 
-			return redirect( '/dashboard' );
+			return redirect( '/profile/' . $validated['user_id'] );
     }
   }
 

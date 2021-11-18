@@ -14,7 +14,30 @@
 		  <h4 class="card-title">{{ $page_title }}</h4>
 		</div>
 		<div class="card-body">
-
+            @if ($errors->has('username'))
+			  <div class="alert alert-danger solid alert-dismissible fade show">
+				<svg viewBox="0 0 24 24" width="24 " height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+				<strong>Error!</strong> {{ $errors->first('username') }}
+				<button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+				</button>
+			  </div>
+			@endif
+			@if ($errors->has('email'))
+			  <div class="alert alert-danger solid alert-dismissible fade show">
+				<svg viewBox="0 0 24 24" width="24 " height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+				<strong>Error!</strong> {{ $errors->first('email') }}
+				<button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+				</button>
+			  </div>
+			@endif
+			@if ($errors->has('phone_number'))
+			  <div class="alert alert-danger solid alert-dismissible fade show">
+				<svg viewBox="0 0 24 24" width="24 " height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+				<strong>Error!</strong> {{ $errors->first('phone_number') }}
+				<button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+				</button>
+			  </div>
+			@endif
 		  <div id="smartwizard" class="form-wizard order-create">
 			<ul class="nav nav-wizard">
 			  <li><a class="nav-link" href="#wizard_section_1">
@@ -33,7 +56,7 @@
 			<form class="wizard_form form-create-new-coordinador" action="{{ !isset($u_user->id) ? url('/coordinador/create') : url('/coordinador/edit/' . $u_user->id) }}" method="post"  enctype="multipart/form-data">
 			  @csrf <!-- {{ csrf_field() }} -->
 			  <div class="tab-content">
-				<input type="hidden" id="current_wizard" name="current_wizard" value="{{ old('current_wizard')? old('current_wizard') : 1 }}">
+				<input type="hidden" id="current_wizard" name="current_wizard" value="1">
 				<div id="wizard_section_1" class="tab-pane" role="tabpanel">
 				  <div class="row">
 					<div class="col-lg-6 mb-2">
@@ -144,7 +167,7 @@
                             </div>
                         @endif
                         </div>
-                      </div>
+                    </div>
 					<div class="col-lg-6 mb-2">
 					  <div class="form-group">
 						<label class="text-label">Email *</label>
@@ -195,12 +218,12 @@
 						  <div class="input-group-prepend">
 							<span class="input-group-text"> <i class="fa fa-columns"></i> </span>
 						  </div>
-						  <select onchange="onChangeSection()" id="section" name="section_id" class="form-control default-select">
+						  <select onchange="onChangeSection()" id="section" name="section_id" class="form-control" data-id="{{isset($u_user->detail->section_id) ? $u_user->detail->section_id : -1}}">
 							<option value="0">choose</option>
 							  @foreach ($states as $state)
 									@foreach ($state->sections as $section)
 										<?php $isThis = isset($u_user->detail->section_id)? ($u_user->detail->section_id == $section->id) : (old('section_id') == $section->id) ;?>
-										<option {{ $isThis ? 'selected' : '' }} style="display: none;" class="section section_part_{{$state->id}}" value="{{ $section->id }}">{{ $section->code }}</option>
+										<option style="display: none;" class="section section_part_{{$state->id}}" value="{{ $section->id }}">{{ $section->code }}</option>
 									@endforeach
 							  @endforeach
 						  </select>
@@ -214,7 +237,7 @@
 						  <div class="input-group-prepend">
 							<span class="input-group-text"> <i class="fa fa-car"></i> </span>
 						  </div>
-						  <select id="town" name="town_id" class="form-control default-select ">
+						  <select id="town" name="town_id" class="form-control default-select " data-id="{{isset($u_user->detail->town_id) ? $u_user->detail->town_id : -1}}">
 							<option value="0">Choose</option>
 							  @foreach ($states as $state)
 									@foreach ($state->sections as $section)
@@ -235,7 +258,7 @@
 						  <div class="input-group-prepend">
 							<span class="input-group-text"> <i class="fa fa-bus"></i> </span>
 						  </div>
-						  <select id="townhall" name="townhall_id" class="form-control default-select ">
+						  <select id="townhall" name="townhall_id" class="form-control default-select " data-id="{{isset($u_user->detail->townhall_id) ? $u_user->detail->townhall_id : -1}}">
 							<option value="0">Choose</option>
 							  @foreach ($states as $state)
 									@foreach ($state->sections as $section)
@@ -256,7 +279,7 @@
 						  <div class="input-group-prepend">
 							<span class="input-group-text"> <i class="fa fa-object-group"></i> </span>
 						  </div>
-						  <input type="text" id="colonia_name" name="colonia_name" class="form-control" value="{{ isset($u_user->detail->colonia->name)? $u_user->detail->colonia->name : old('colonia_name') }}" required>
+						  <input type="text" id="colonia_name" name="colonia_name" class="form-control" data-id="{{ isset($u_user->detail->colonia->name)? $u_user->detail->colonia->name : old('colonia_name') }}" value="{{ isset($u_user->detail->colonia->name)? $u_user->detail->colonia->name : old('colonia_name') }}" required>
 						  <input type="hidden" id="colonia_id" name="colonia_id" value="0">
 						  <div class="input-group-append">
 							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose</button>
@@ -280,7 +303,7 @@
 						  <div class="input-group-prepend">
 							<span class="input-group-text"> <i class="fa fa-code"></i> </span>
 						  </div>
-						  <input type="text" id="postal_code_code" name="postal_code_code" class="form-control" value="{{ isset($u_user->detail->postal->code)? $u_user->detail->postal->code : old('postal_code_code') }}" required>
+						  <input type="text" id="postal_code_code" name="postal_code_code" class="form-control" data-id="{{ isset($u_user->detail->postal->code)? $u_user->detail->postal->code : old('colonia_name') }}" value="{{ isset($u_user->detail->postal->code)? $u_user->detail->postal->code : old('postal_code_code') }}" required>
 						  <input type="hidden" id="postal_code_id" name="postal_code_id" value="0">
 						  <div class="input-group-append">
 							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose</button>
@@ -503,7 +526,7 @@
                               </div>
 						</div>
                         <div class="col-lg-6 mb-2">
-                            <div class="col-lg-6 mb-2">
+                            <div class="col-lg-12 mb-2">
                                 <div class="form-group">
                                 <label class="text-label">Usuario de Facebook *</label>
                                 <div class="input-group">
@@ -514,7 +537,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 mb-2">
+                            <div class="col-lg-12 mb-2">
                                 <div class="form-group">
                                 <label class="text-label">Usuario de Twitter *</label>
                                 <div class="input-group">
@@ -525,7 +548,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 mb-2">
+                            <div class="col-lg-12 mb-2">
                                 <div class="form-group">
                                 <label class="text-label">Usuario de Instagram *</label>
                                 <div class="input-group">

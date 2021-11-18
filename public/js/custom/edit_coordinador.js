@@ -1,4 +1,4 @@
-jQuery(".form-create-new-seccional").validate({
+jQuery(".form-create-new-coordinador").validate({
     rules: {
       "username": {
           required: !0,
@@ -21,13 +21,13 @@ jQuery(".form-create-new-seccional").validate({
       "phone_number_confirm": {
           required: !0,
           equalTo: '#phone_number',
-      },
-      /*"phone_number_2": {
+      }/*,
+      "phone_number_2": {
           required: !0,
           digits: true,
           minlength: 10,
           maxlength: 10,
-      },*/
+      }*/,
       "exterior_no": {
           required: !0,
           maxlength: 8,
@@ -68,9 +68,9 @@ jQuery(".form-create-new-seccional").validate({
       "assigned_electoral_sections": {
           required: !0,
           digits: true
-    //   },
-    //   "image": {
-    //       required: !0,
+      // },
+      // "image": {
+      //     required: !0,
       }
     },
     messages: {
@@ -127,26 +127,26 @@ jQuery(".form-create-new-seccional").validate({
   }
 
   function onChangeSection() {
-    $('#townhall').parent().find('button').trigger('click');
-    $('#town').parent().find('button').trigger('click');
+      $('#townhall').parent().find('button').trigger('click');
+      $('#town').parent().find('button').trigger('click');
 
-    $('.postal_code').css('display', 'none');
-    $('.postal_code_part_' + $('#section').val()).css('display', 'block');
-    $('.colonia').css('display', 'none');
-    $('.colonia_part_' + $('#section').val()).css('display', 'block');
-    $('.townhall').css('display', 'none');
-    $('.townhall_part_' + $('#section').val()).css('display', 'block');
-    $('.town').css('display', 'none');
-    $('.town_part_' + $('#section').val()).css('display', 'block');
+      $('.postal_code').css('display', 'none');
+      $('.postal_code_part_' + $('#section').data('id')).css('display', 'block');
+      $('.colonia').css('display', 'none');
+      $('.colonia_part_' + $('#section').data('id')).css('display', 'block');
+      $('.townhall').css('display', 'none');
+      $('.townhall_part_' + $('#section').data('id')).css('display', 'block');
+      $('.town').css('display', 'none');
+      $('.town_part_' + $('#section').data('id')).css('display', 'block');
 
-    $('#postal_code_id').val(0);
-    $('#postal_code_code').val("");
-    $('#colonia_id').val(0);
-    $('#colonia_name').val("");
-    $('#townhall').val(0);
-    $('#townhall').parent().find('div.filter-option-inner-inner').html('choose');
-    $('#town').val(0);
-    $('#town').parent().find('div.filter-option-inner-inner').html('choose');
+      $('#postal_code_id').val(0);
+      $('#postal_code_code').val("");
+      $('#colonia_id').val(0);
+      $('#colonia_name').val("");
+      $('#townhall').val(0);
+      $('#townhall').parent().find('div.filter-option-inner-inner').html('choose');
+      $('#town').val(0);
+      $('#town').parent().find('div.filter-option-inner-inner').html('choose');
   }
 
   function onChooseColonia(colonia_id, colonia_name) {
@@ -160,26 +160,26 @@ jQuery(".form-create-new-seccional").validate({
   }
 
   function previewFile(input){
-    var file = $("input[type=file]").get(0).files[0];
+      var file = $("input[type=file]").get(0).files[0];
 
-    if(file){
-        var reader = new FileReader();
+      if(file){
+          var reader = new FileReader();
 
-        reader.onload = function(){
-            $("#previewImg").attr("src", reader.result);
-            $("#photo_data").val(reader.result );
-        }
+          reader.onload = function(){
+              $("#previewImg").attr("src", reader.result);
+              $("#photo_data").val(reader.result );
+          }
 
-        reader.readAsDataURL(file);
-    }
-}
+          reader.readAsDataURL(file);
+      }
+  }
 
-$(document).ready(function(){
-    onChangeState();
-    $("#current_wizard").val(1);
-    onChooseColonia();
-    onChoosepostal_code();
+  $(document).ready(function(){
+      onChangeState();
+      $("#current_wizard").val(1);
+      onChooseColonia();
+      onChoosepostal_code();
 
-    $("#colonia_name").val($("#colonia_name").data('id'));
-    $("#postal_code_code").val($("#postal_code_code").data('id'));
-});
+      $("#colonia_name").val($("#colonia_name").data('id'));
+      $("#postal_code_code").val($("#postal_code_code").data('id'));
+  });

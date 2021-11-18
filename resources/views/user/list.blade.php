@@ -55,7 +55,7 @@
       font-weight: normal;
   }
 
-  .k-i-none {
+  .k-i-none, .k-i-expand, .k-i-collapse {
       padding: 15px 15px;
   }
 </style>
@@ -84,7 +84,7 @@
           </div>
           <button type="submit" class="btn btn-primary ml-2">Search</button>
         </form> --}}
-        <button type="button" id="create_chlid_user" class="btn mr-2 btn-danger btn-lg">Add</button>
+        <button type="button" id="create_chlid_user" class="btn mr-2 btn-danger btn-lg" onclick="createNewUser({{ Auth::user()->id }})">Add</button>
         <input type="hidden" id="parent_id" value="{{ Auth::user()->id }}" />
 
         <div class="card-body">

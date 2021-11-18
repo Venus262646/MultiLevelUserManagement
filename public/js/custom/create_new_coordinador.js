@@ -127,7 +127,6 @@ function onChangeState() {
 }
 
 function onChangeSection() {
-
     $('#townhall').parent().find('button').trigger('click');
     $('#town').parent().find('button').trigger('click');
 
@@ -176,7 +175,11 @@ function previewFile(input){
 }
 
 $(document).ready(function(){
-    // onChangeState();
-    // onChooseColonia();
-    // onChoosepostal_code();
+    onChangeState();
+    $("#current_wizard").val(1);
+    onChooseColonia();
+    onChoosepostal_code();
+
+    $("#colonia_name").val($("#colonia_name").data('id'));
+    $("#postal_code_code").val($("#postal_code_code").data('id'));
 });

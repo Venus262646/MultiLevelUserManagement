@@ -71,18 +71,37 @@ class SeccionalController extends Controller
 }
 
 public function editMovilizador($user_id) {
-    return $this->createNewMovilizador($user_id, 0);
-    // $user = User::find($user_id);
+    $parent_id = $user_id;
+    $isCreate = 0;
 
-    // $page_title       = 'Edit New Coordinador';
-    // $page_description = 'Some description for the page';
+    $weight = config('dz.public.weight');
 
-    // $action = 'edit_coordinador';
+    if(!Auth::user() || $weight[Auth::user()->level] > $weight["Seccional"])
+      return redirect("/dashboard");
 
-    // $states        = State::all();
-    // $auto_password = Str::random( 8 );
+    if ( $parent_id === 0 ) {
+        $parent_id = Auth::user()->id;
+    }
 
-    // return view('admin.editCoordinador', compact( 'page_title', 'page_description', 'action', 'states', 'auto_password', 'user' ));
+    $level = "Movilizador";
+
+    $states        = State::all();
+    $auto_password = Str::random( 8 );
+
+    $page_title       = $isCreate ? 'Create New ' . $level : 'Edit ' . $level;
+    $page_description = 'Some description for the page';
+
+    $action = 'edit_movilizador';
+
+    $u_user = null;
+    if(!$isCreate) {
+        $u_user = User::find($parent_id);
+
+        if($u_user->detail->elector_key == null) $u_user->detail->edad = 16;
+        else $u_user->detail->edad = 18;
+    }
+
+    return view( 'seccional.createNewMovilizador', compact( 'page_title', 'page_description', 'action', 'states', 'auto_password', 'parent_id', 'level', 'u_user' ) );
 }
 
   public function create(Request $request) {
@@ -166,7 +185,7 @@ public function editMovilizador($user_id) {
 			//$avatar_url = time() . '.' . $request->image->extension();
 			//$request->image->move( public_path( 'images/avatar' ), $avatar_url );
 			$avatar_url = time() . ".jpg";
-			$path = 'images/avatar/' . $avatar_url; 
+			$path = 'images/avatar/' . $avatar_url;
 			$img = $request->input('photo_data');
 			if ($img != null ){
 				$img = str_replace('data:image/png;base64,', '', $request->input('photo_data'));
@@ -177,7 +196,7 @@ public function editMovilizador($user_id) {
 				$angle = 0;
 				$rotate = imagerotate($source, $angle, 0); // if want to rotate the image
 				$imageSave = imagejpeg($rotate,$path,100);
-				imagedestroy($source);	
+				imagedestroy($source);
 			}
 
 			$validated['password'] = Hash::make( $validated['password'] );
@@ -190,20 +209,20 @@ public function editMovilizador($user_id) {
 
 			$from_email = Auth::user()->email;
 
-			Mail::send(
-				array( 'text' => 'mail.contact' ),
-				array(
-					'content'    => 'Your account created',
-					'name'       => $user->first_name . '  ' . $user->last_name,
-					'from_email' => $from_email,
-				),
-				function( $message ) use ( $user, $from_email ) {
-					$message->to( $user->email, $user->first_name . '  ' . $user->second_name )->subject( 'Your account created' );
-					$message->from( $from_email, $user->first_name . '  ' . $user->second_name );
-				}
-			);
+			// Mail::send(
+			// 	array( 'text' => 'mail.contact' ),
+			// 	array(
+			// 		'content'    => 'Your account created',
+			// 		'name'       => $user->first_name . '  ' . $user->last_name,
+			// 		'from_email' => $from_email,
+			// 	),
+			// 	function( $message ) use ( $user, $from_email ) {
+			// 		$message->to( $user->email, $user->first_name . '  ' . $user->second_name )->subject( 'Your account created' );
+			// 		$message->from( $from_email, $user->first_name . '  ' . $user->second_name );
+			// 	}
+			// );
 
-			return redirect( '/dashboard' );
+			return redirect( '/profile/' . $validated['user_id'] );
     }
   }
 

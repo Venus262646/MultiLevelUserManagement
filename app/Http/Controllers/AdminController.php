@@ -63,19 +63,35 @@ class AdminController extends Controller {
 	}
 
     public function editCoordinador($user_id) {
-        return $this->createNewCoordinador($user_id, 0);
-        // $user = User::find($user_id);
+        $isCreate = 0;
+        $parent_id = $user_id;
 
-        // $page_title       = 'Edit New Coordinador';
-		// $page_description = 'Some description for the page';
+        $weight = config('dz.public.weight');
 
-		// $action = 'edit_coordinador';
+		if ( ! Auth::user() || $weight[Auth::user()->level] > $weight['Admin'] ) {
+			return redirect( '/dashboard' );
+		}
+		if ( $parent_id === 0 ) {
+			$parent_id = Auth::user()->id;
+		}
 
-        // $states        = State::all();
-		// $auto_password = Str::random( 8 );
+		$level = "Coordinador";
 
-        // return view('admin.editCoordinador', compact( 'page_title', 'page_description', 'action', 'states', 'auto_password', 'user' ));
-    }
+		$states        = State::all();
+		$auto_password = Str::random( 8 );
+
+		$page_title       = $isCreate ? 'Create New ' . $level : 'Edit ' . $level;
+		$page_description = 'Some description for the page';
+
+		$action = 'edit_coordinador';
+
+        $u_user = null;
+        if(!$isCreate) {
+            $u_user = User::find($parent_id);
+        }
+
+		return view( 'admin.createNewCoordinador', compact( 'page_title', 'page_description', 'action', 'states', 'auto_password', 'parent_id', 'level', 'u_user' ) );
+	}
 
 	public function create( Request $request ) {
 		if ( ! Auth::user() || Auth::user()->level != 'SuperAdmin' ) {
@@ -128,7 +144,7 @@ class AdminController extends Controller {
 			$user->avatar_url      = $avatar_url;
 			$user->email_verified_at     = now();
 			$user->save();
-			return redirect( '/superadmin/' );
+			return redirect( '/dashboard/' );
 
 		}
 	}

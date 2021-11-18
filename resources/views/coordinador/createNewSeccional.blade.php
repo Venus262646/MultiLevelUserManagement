@@ -14,7 +14,30 @@
 		  <h4 class="card-title">{{ $page_title }}</h4>
 		</div>
 		<div class="card-body">
-
+            @if ($errors->has('username'))
+			  <div class="alert alert-danger solid alert-dismissible fade show">
+				<svg viewBox="0 0 24 24" width="24 " height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+				<strong>Error!</strong> {{ $errors->first('username') }}
+				<button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+				</button>
+			  </div>
+			@endif
+			@if ($errors->has('email'))
+			  <div class="alert alert-danger solid alert-dismissible fade show">
+				<svg viewBox="0 0 24 24" width="24 " height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+				<strong>Error!</strong> {{ $errors->first('email') }}
+				<button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+				</button>
+			  </div>
+			@endif
+			@if ($errors->has('phone_number'))
+			  <div class="alert alert-danger solid alert-dismissible fade show">
+				<svg viewBox="0 0 24 24" width="24 " height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+				<strong>Error!</strong> {{ $errors->first('phone_number') }}
+				<button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+				</button>
+			  </div>
+			@endif
 		  <div id="smartwizard" class="form-wizard order-create">
 			<ul class="nav nav-wizard">
 			  <li><a class="nav-link" href="#wizard_section_1">
@@ -170,186 +193,186 @@
 				  </div>
 				</div>
 				<div id="wizard_section_2" class="tab-pane" role="tabpanel">
-				  <div class="row">
-					<div class="col-lg-6 mb-2">
-					  <div class="form-group">
-						<label class="text-label">Estado *</label>
-						<div class="input-group">
-						  <div class="input-group-prepend">
-							<span class="input-group-text"> <i class="fa fa-globe"></i> </span>
-						  </div>
-						  <select id="state" name="state_id" onchange="onChangeState()" class="form-control default-select ">
-							<option value="0">choose</option>
-							@foreach ($states as $state)
-								<?php $isThis = isset($u_user->detail->state_id)? ($u_user->detail->state_id == $state->id) : (old('state_id') == $state->id) ;?>
-							  <option {{ $isThis ? 'selected' : '' }} value="{{ $state->id }}">{{ $state->name }}</option>
-							@endforeach
-						  </select>
-						</div>
-					  </div>
-					</div>
-					<div class="col-lg-6 mb-2">
-					  <div class="form-group">
-						<label class="text-label">Sección *</label>
-						<div class="input-group">
-						  <div class="input-group-prepend">
-							<span class="input-group-text"> <i class="fa fa-columns"></i> </span>
-						  </div>
-						  <select onchange="onChangeSection()" id="section" name="section_id" class="form-control default-select">
-							<option value="0">choose</option>
-							  @foreach ($states as $state)
-									@foreach ($state->sections as $section)
-										<?php $isThis = isset($u_user->detail->section_id)? ($u_user->detail->section_id == $section->id) : (old('section_id') == $section->id) ;?>
-										<option {{ $isThis ? 'selected' : '' }} style="display: none;" class="section section_part_{{$state->id}}" value="{{ $section->id }}">{{ $section->code }}</option>
-									@endforeach
-							  @endforeach
-						  </select>
-						</div>
-					  </div>
-					</div>
-					<div class="col-lg-6 mb-2">
-					  <div class="form-group">
-						<label class="text-label">Ciudad *</label>
-						<div class="input-group">
-						  <div class="input-group-prepend">
-							<span class="input-group-text"> <i class="fa fa-car"></i> </span>
-						  </div>
-						  <select id="town" name="town_id" class="form-control default-select ">
-							<option value="0">Choose</option>
-							  @foreach ($states as $state)
-									@foreach ($state->sections as $section)
-										@foreach ($section->towns as $town)
-											<?php $isThis = isset($u_user->detail->town_id)? ($u_user->detail->town_id == $town->id) : (old('town_id') == $town->id) ;?>
-											<option {{ $isThis ? 'selected' : '' }} class="town town_part_{{$section->id}}" style="display: none;" value="{{$town->id}}">{{$town->name}}</option>
-										@endforeach
-									@endforeach
-							  @endforeach
-						  </select>
-						</div>
-					  </div>
-					</div>
-					<div class="col-lg-6 mb-2">
-					  <div class="form-group">
-						<label class="text-label">Alcaldía o Municipio *</label>
-						<div class="input-group">
-						  <div class="input-group-prepend">
-							<span class="input-group-text"> <i class="fa fa-bus"></i> </span>
-						  </div>
-						  <select id="townhall" name="townhall_id" class="form-control default-select ">
-							<option value="0">Choose</option>
-							  @foreach ($states as $state)
-									@foreach ($state->sections as $section)
-										@foreach ($section->townhalls as $townhall)
-											<?php $isThis = isset($u_user->detail->townhall_id)? ($u_user->detail->townhall_id == $townhall->id) : (old('townhall_id') == $townhall->id) ;?>
-											<option {{ $isThis ? 'selected' : '' }} class="townhall townhall_part_{{$section->id}}" style="display: none;" value="{{$townhall->id}}">{{$townhall->name}}</option>
-										@endforeach
-									@endforeach
-							  @endforeach
-						  </select>
-						</div>
-					  </div>
-					</div>
-					<div class="col-lg-6 mb-2">
-					  <div class="form-group">
-						<label class="text-label">Colonia *</label>
-						<div class="input-group">
-						  <div class="input-group-prepend">
-							<span class="input-group-text"> <i class="fa fa-object-group"></i> </span>
-						  </div>
-						  <input type="text" id="colonia_name" name="colonia_name" class="form-control" value="{{ isset($u_user->detail->colonia->name)? $u_user->detail->colonia->name : old('colonia_name') }}" required>
-						  <input type="hidden" id="colonia_id" name="colonia_id" value="0">
-						  <div class="input-group-append">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose</button>
-							<div class="dropdown-menu">
-							  @foreach ($states as $state)
-									@foreach ($state->sections as $section)
-										@foreach ($section->colonias as $colonia)
-											<a class="dropdown-item colonia colonia_part_{{$section->id}}" style="display: none;" href="javascript:onChooseColonia({{$colonia->id}}, '{{$colonia->name}}')">{{$colonia->name}}</a>
-										@endforeach
-									@endforeach
-							  @endforeach
-							</div>
-						  </div>
-						</div>
-					  </div>
-					</div>
-					<div class="col-lg-6 mb-2">
-					  <div class="form-group">
-						<label class="text-label">Código Postal *</label>
-						<div class="input-group">
-						  <div class="input-group-prepend">
-							<span class="input-group-text"> <i class="fa fa-code"></i> </span>
-						  </div>
-						  <input type="text" id="postal_code_code" name="postal_code_code" class="form-control" value="{{ isset($u_user->detail->postal->code)? $u_user->detail->postal->code : old('postal_code_code') }}" required>
-						  <input type="hidden" id="postal_code_id" name="postal_code_id" value="0">
-						  <div class="input-group-append">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose</button>
-							<div class="dropdown-menu">
-							  @foreach ($states as $state)
-								@foreach ($state->sections as $section)
-								  @foreach ($section->postal_codes as $postal_code)
-									<a style="display: none;" class="dropdown-item postal_code postal_code_part_{{$section->id}}" href="javascript:onChoosepostal_code({{$postal_code->id}}, {{$postal_code->code}})">{{$postal_code->code}}</a>
-								  @endforeach
-								@endforeach
-							  @endforeach
-							</div>
-						  </div>
-						</div>
-					  </div>
-					</div>
-					<div class="col-lg-6 mb-2">
-					  <div class="form-group">
-						<label class="text-label">Calle *</label>
-						<div class="input-group">
-						  <div class="input-group-prepend">
-							<span class="input-group-text"> <i class="fa fa-road"></i> </span>
-						  </div>
-						  <input type="text" id="street" value="{{ isset($u_user->detail->street)? $u_user->detail->street : old('street') }}" class="form-control" name="street" required>
-						</div>
-					  </div>
-					</div>
-					<div class="col-lg-6 mb-2">
-					  <div class="form-group">
-						<label class="text-label">No. Exterior *</label>
-						<div class="input-group">
-						  <div class="input-group-prepend">
-							<span class="input-group-text"> <i class="fa fa-id-card"></i> </span>
-						  </div>
-						  <input type="text" class="form-control" id="exterior_no" name="exterior_no" value="{{ isset($u_user->detail->exterior_no)? $u_user->detail->exterior_no : old('exterior_no') }}" required>
-						</div>
-					  </div>
-					</div>
-					<div class="col-lg-6 mb-2">
-					  <div class="form-group">
-						<label class="text-label">No. Interior *</label>
-						<div class="input-group">
-						  <div class="input-group-prepend">
-							<span class="input-group-text"> <i class="fa fa-id-card-o"></i> </span>
-						  </div>
-						  <input type="text" class="form-control" name="interior_no" value="{{ isset($u_user->detail->interior_no)? $u_user->detail->interior_no : old('interior_no') }}" required>
-						</div>
-					  </div>
-					</div>
-					<div class="col-lg-6 mb-2">
-					  <div class="form-group">
-						<label class="text-label">Escolaridad *</label>
-						<div class="input-group">
-						  <div class="input-group-prepend">
-							<span class="input-group-text"> <i class="fa fa-money"></i> </span>
-						  </div>
-						  <select id="scholarship" name="scholarship" class="form-control default-select ">
-                              <?php  ?>
-							<option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Ninguna" ? "selected" : "" }} value="Ninguna">Ninguna</option>
-							<option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Primaria" ? "selected" : "" }} value="Primaria">Primaria</option>
-							<option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Secundaria" ? "selected" : "" }} value="Secundaria">Secundaria</option>
-							<option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Preparatoria" ? "selected" : "" }} value="Preparatoria">Preparatoria</option>
-							<option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Licenciatura" ? "selected" : "" }} value="Licenciatura">Licenciatura</option>
-							<option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Pos-Grado" ? "selected" : "" }} value="Pos-Grado">Pos-Grado</option>
-						  </select>
-						</div>
-					  </div>
-					</div>
-				  </div>
+                    <div class="row">
+                        <div class="col-lg-6 mb-2">
+                          <div class="form-group">
+                            <label class="text-label">Estado *</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-globe"></i> </span>
+                              </div>
+                              <select id="state" name="state_id" onchange="onChangeState()" class="form-control default-select ">
+                                <option value="0">choose</option>
+                                @foreach ($states as $state)
+                                    <?php $isThis = isset($u_user->detail->state_id)? ($u_user->detail->state_id == $state->id) : (old('state_id') == $state->id) ;?>
+                                  <option {{ $isThis ? 'selected' : '' }} value="{{ $state->id }}">{{ $state->name }}</option>
+                                @endforeach
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 mb-2">
+                          <div class="form-group">
+                            <label class="text-label">Sección *</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-columns"></i> </span>
+                              </div>
+                              <select onchange="onChangeSection()" id="section" name="section_id" class="form-control" data-id="{{isset($u_user->detail->section_id) ? $u_user->detail->section_id : -1}}">
+                                <option value="0">choose</option>
+                                  @foreach ($states as $state)
+                                        @foreach ($state->sections as $section)
+                                            <?php $isThis = isset($u_user->detail->section_id)? ($u_user->detail->section_id == $section->id) : (old('section_id') == $section->id) ;?>
+                                            <option style="display: none;" class="section section_part_{{$state->id}}" value="{{ $section->id }}">{{ $section->code }}</option>
+                                        @endforeach
+                                  @endforeach
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 mb-2">
+                          <div class="form-group">
+                            <label class="text-label">Ciudad *</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-car"></i> </span>
+                              </div>
+                              <select id="town" name="town_id" class="form-control default-select " data-id="{{isset($u_user->detail->town_id) ? $u_user->detail->town_id : -1}}">
+                                <option value="0">Choose</option>
+                                  @foreach ($states as $state)
+                                        @foreach ($state->sections as $section)
+                                            @foreach ($section->towns as $town)
+                                                <?php $isThis = isset($u_user->detail->town_id)? ($u_user->detail->town_id == $town->id) : (old('town_id') == $town->id) ;?>
+                                                <option {{ $isThis ? 'selected' : '' }} class="town town_part_{{$section->id}}" style="display: none;" value="{{$town->id}}">{{$town->name}}</option>
+                                            @endforeach
+                                        @endforeach
+                                  @endforeach
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 mb-2">
+                          <div class="form-group">
+                            <label class="text-label">Alcaldía o Municipio *</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-bus"></i> </span>
+                              </div>
+                              <select id="townhall" name="townhall_id" class="form-control default-select " data-id="{{isset($u_user->detail->townhall_id) ? $u_user->detail->townhall_id : -1}}">
+                                <option value="0">Choose</option>
+                                  @foreach ($states as $state)
+                                        @foreach ($state->sections as $section)
+                                            @foreach ($section->townhalls as $townhall)
+                                                <?php $isThis = isset($u_user->detail->townhall_id)? ($u_user->detail->townhall_id == $townhall->id) : (old('townhall_id') == $townhall->id) ;?>
+                                                <option {{ $isThis ? 'selected' : '' }} class="townhall townhall_part_{{$section->id}}" style="display: none;" value="{{$townhall->id}}">{{$townhall->name}}</option>
+                                            @endforeach
+                                        @endforeach
+                                  @endforeach
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 mb-2">
+                          <div class="form-group">
+                            <label class="text-label">Colonia *</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-object-group"></i> </span>
+                              </div>
+                              <input type="text" id="colonia_name" name="colonia_name" class="form-control" data-id="{{ isset($u_user->detail->colonia->name)? $u_user->detail->colonia->name : old('colonia_name') }}" value="{{ isset($u_user->detail->colonia->name)? $u_user->detail->colonia->name : old('colonia_name') }}" required>
+                              <input type="hidden" id="colonia_id" name="colonia_id" value="0">
+                              <div class="input-group-append">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose</button>
+                                <div class="dropdown-menu">
+                                  @foreach ($states as $state)
+                                        @foreach ($state->sections as $section)
+                                            @foreach ($section->colonias as $colonia)
+                                                <a class="dropdown-item colonia colonia_part_{{$section->id}}" style="display: none;" href="javascript:onChooseColonia({{$colonia->id}}, '{{$colonia->name}}')">{{$colonia->name}}</a>
+                                            @endforeach
+                                        @endforeach
+                                  @endforeach
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 mb-2">
+                          <div class="form-group">
+                            <label class="text-label">Código Postal *</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-code"></i> </span>
+                              </div>
+                              <input type="text" id="postal_code_code" name="postal_code_code" class="form-control" data-id="{{ isset($u_user->detail->postal->code)? $u_user->detail->postal->code : old('colonia_name') }}" value="{{ isset($u_user->detail->postal->code)? $u_user->detail->postal->code : old('postal_code_code') }}" required>
+                              <input type="hidden" id="postal_code_id" name="postal_code_id" value="0">
+                              <div class="input-group-append">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose</button>
+                                <div class="dropdown-menu">
+                                  @foreach ($states as $state)
+                                    @foreach ($state->sections as $section)
+                                      @foreach ($section->postal_codes as $postal_code)
+                                        <a style="display: none;" class="dropdown-item postal_code postal_code_part_{{$section->id}}" href="javascript:onChoosepostal_code({{$postal_code->id}}, {{$postal_code->code}})">{{$postal_code->code}}</a>
+                                      @endforeach
+                                    @endforeach
+                                  @endforeach
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 mb-2">
+                          <div class="form-group">
+                            <label class="text-label">Calle *</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-road"></i> </span>
+                              </div>
+                              <input type="text" id="street" value="{{ isset($u_user->detail->street)? $u_user->detail->street : old('street') }}" class="form-control" name="street" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 mb-2">
+                          <div class="form-group">
+                            <label class="text-label">No. Exterior *</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-id-card"></i> </span>
+                              </div>
+                              <input type="text" class="form-control" id="exterior_no" name="exterior_no" value="{{ isset($u_user->detail->exterior_no)? $u_user->detail->exterior_no : old('exterior_no') }}" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 mb-2">
+                          <div class="form-group">
+                            <label class="text-label">No. Interior *</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-id-card-o"></i> </span>
+                              </div>
+                              <input type="text" class="form-control" name="interior_no" value="{{ isset($u_user->detail->interior_no)? $u_user->detail->interior_no : old('interior_no') }}" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 mb-2">
+                          <div class="form-group">
+                            <label class="text-label">Escolaridad *</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-money"></i> </span>
+                              </div>
+                              <select id="scholarship" name="scholarship" class="form-control default-select ">
+                                  <?php  ?>
+                                <option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Ninguna" ? "selected" : "" }} value="Ninguna">Ninguna</option>
+                                <option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Primaria" ? "selected" : "" }} value="Primaria">Primaria</option>
+                                <option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Secundaria" ? "selected" : "" }} value="Secundaria">Secundaria</option>
+                                <option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Preparatoria" ? "selected" : "" }} value="Preparatoria">Preparatoria</option>
+                                <option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Licenciatura" ? "selected" : "" }} value="Licenciatura">Licenciatura</option>
+                                <option {{ isset($u_user->detail->scholarship) && $u_user->detail->scholarship == "Pos-Grado" ? "selected" : "" }} value="Pos-Grado">Pos-Grado</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 				</div>
 				<div id="wizard_section_3" class="tab-pane" role="tabpanel">
 				  <div class="row">
@@ -502,7 +525,7 @@
                               </div>
 						</div>
                         <div class="col-lg-6 mb-2">
-                            <div class="col-lg-6 mb-2">
+                            <div class="col-lg-12 mb-2">
                                 <div class="form-group">
                                 <label class="text-label">Usuario de Facebook *</label>
                                 <div class="input-group">
@@ -513,7 +536,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 mb-2">
+                            <div class="col-lg-12 mb-2">
                                 <div class="form-group">
                                 <label class="text-label">Usuario de Twitter *</label>
                                 <div class="input-group">
@@ -524,7 +547,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 mb-2">
+                            <div class="col-lg-12 mb-2">
                                 <div class="form-group">
                                 <label class="text-label">Usuario de Instagram *</label>
                                 <div class="input-group">

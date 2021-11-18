@@ -131,13 +131,13 @@ jQuery(".form-create-new-seccional").validate({
     $('#town').parent().find('button').trigger('click');
 
     $('.postal_code').css('display', 'none');
-    $('.postal_code_part_' + $('#section').val()).css('display', 'block');
+    $('.postal_code_part_' + $('#section').data('id')).css('display', 'block');
     $('.colonia').css('display', 'none');
-    $('.colonia_part_' + $('#section').val()).css('display', 'block');
+    $('.colonia_part_' + $('#section').data('id')).css('display', 'block');
     $('.townhall').css('display', 'none');
-    $('.townhall_part_' + $('#section').val()).css('display', 'block');
+    $('.townhall_part_' + $('#section').data('id')).css('display', 'block');
     $('.town').css('display', 'none');
-    $('.town_part_' + $('#section').val()).css('display', 'block');
+    $('.town_part_' + $('#section').data('id')).css('display', 'block');
 
     $('#postal_code_id').val(0);
     $('#postal_code_code').val("");

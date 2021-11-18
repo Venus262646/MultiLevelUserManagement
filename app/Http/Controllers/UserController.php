@@ -226,16 +226,16 @@ class UserController extends Controller {
                 return redirect('/superadmin/createNewAdmin');
                 break;
             case 2:
-                return redirect('/admin/createNewCoordinador');
+                return redirect('/admin/createNewCoordinador/' . $parent_id);
                 break;
             case 3:
-                return redirect('/coordinador/createNewSeccional');
+                return redirect('/coordinador/createNewSeccional/' . $parent_id);
                 break;
             case 4:
-                return redirect('/seccional/createNewMovilizador');
+                return redirect('/seccional/createNewMovilizador/' . $parent_id);
                 break;
             case 5:
-                return redirect('/movilizador/createNewFamiliar');
+                return redirect('/movilizador/createNewFamiliar/' . $parent_id);
                 break;
             default:
                 return back();

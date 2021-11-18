@@ -166,7 +166,7 @@ public function editFamiliar($user_id) {
 			/*$avatar_url = time() . '.' . $request->image->extension();
 			$request->image->move( public_path( 'images/avatar' ), $avatar_url );*/
 			$avatar_url = time() . ".jpg";
-			$path = 'images/avatar/' . $avatar_url; 
+			$path = 'images/avatar/' . $avatar_url;
 			$img = $request->input('photo_data');
 			if ($img != null ){
 				$img = str_replace('data:image/png;base64,', '', $request->input('photo_data'));
@@ -177,7 +177,7 @@ public function editFamiliar($user_id) {
 				$angle = 0;
 				$rotate = imagerotate($source, $angle, 0); // if want to rotate the image
 				$imageSave = imagejpeg($rotate,$path,100);
-				imagedestroy($source);	
+				imagedestroy($source);
 			}
 
 			// $validated['password'] = Hash::make( $validated['password'] );
@@ -192,20 +192,20 @@ public function editFamiliar($user_id) {
 
 			$from_email = Auth::user()->email;
 
-			Mail::send(
-				array( 'text' => 'mail.contact' ),
-				array(
-					'content'    => 'Your account created',
-					'name'       => $user->first_name . '  ' . $user->last_name,
-					'from_email' => $from_email,
-				),
-				function( $message ) use ( $user, $from_email ) {
-					$message->to( $user->email, $user->first_name . '  ' . $user->second_name )->subject( 'Your account created' );
-					$message->from( $from_email, $user->first_name . '  ' . $user->second_name );
-				}
-			);
+			// Mail::send(
+			// 	array( 'text' => 'mail.contact' ),
+			// 	array(
+			// 		'content'    => 'Your account created',
+			// 		'name'       => $user->first_name . '  ' . $user->last_name,
+			// 		'from_email' => $from_email,
+			// 	),
+			// 	function( $message ) use ( $user, $from_email ) {
+			// 		$message->to( $user->email, $user->first_name . '  ' . $user->second_name )->subject( 'Your account created' );
+			// 		$message->from( $from_email, $user->first_name . '  ' . $user->second_name );
+			// 	}
+			// );
 
-			return redirect( '/dashboard' );
+			return redirect( '/profile/' . $validated['user_id'] );
     	}
   }
 

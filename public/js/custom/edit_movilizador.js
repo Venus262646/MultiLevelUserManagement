@@ -1,4 +1,4 @@
-jQuery(".form-create-new-seccional").validate({
+jQuery(".form-create-new-movilizador").validate({
     rules: {
       "username": {
           required: !0,
@@ -112,18 +112,35 @@ jQuery(".form-create-new-seccional").validate({
 
   function onChangeState() {
 
-      $('#section').parent().find('button').trigger('click');
+    $('#section').parent().find('button').trigger('click');
 
-      $('.section').css('display', 'none');
-      $('.section_part_' + $('#state').val()).css('display', 'block');
+    $('.section').css('display', 'none');
+    $('.section_part_' + $('#state').val()).css('display', 'block');
 
-      $('#section').val(0);
-      $('#section').parent().find('div.filter-option-inner-inner').html('choose');
+    $('#section').val(0);
+    $('#section').parent().find('div.filter-option-inner-inner').html('choose');
 
-      $('#assigned_state').val($('#state').val());
-      $('#assigned_state').parent().find('div.filter-option-inner-inner').html($('#assigned_state_' + $('#assigned_state').val()).html());
+    $('#assigned_state').val($('#state').val());
+    $('#assigned_state').parent().find('div.filter-option-inner-inner').html($('#assigned_state_' + $('#assigned_state').val()).html());
 
-      onChangeSection();
+    onChangeSection();
+}
+
+  function onChangeEdad(value) {
+    // $('#section').parent().find('button').trigger('click');
+
+    // $('.section').css('display', 'none');
+    // $('.section_part_' + $('#state').val()).css('display', 'block');
+
+    // $('#section').val(0);
+    // $('#section').parent().find('div.filter-option-inner-inner').html('choose');
+
+    // $('#assigned_state').val($('#state').val());
+    // $('#assigned_state').parent().find('div.filter-option-inner-inner').html($('#assigned_state_' + $('#assigned_state').val()).html());
+
+    if( value == '16' || value == '17' )
+        $('#edad_result').html('CURP *');
+    else $('#edad_result').html('Clave de Elector *');
   }
 
   function onChangeSection() {
@@ -131,13 +148,13 @@ jQuery(".form-create-new-seccional").validate({
     $('#town').parent().find('button').trigger('click');
 
     $('.postal_code').css('display', 'none');
-    $('.postal_code_part_' + $('#section').val()).css('display', 'block');
+    $('.postal_code_part_' + $('#section').data('id')).css('display', 'block');
     $('.colonia').css('display', 'none');
-    $('.colonia_part_' + $('#section').val()).css('display', 'block');
+    $('.colonia_part_' + $('#section').data('id')).css('display', 'block');
     $('.townhall').css('display', 'none');
-    $('.townhall_part_' + $('#section').val()).css('display', 'block');
+    $('.townhall_part_' + $('#section').data('id')).css('display', 'block');
     $('.town').css('display', 'none');
-    $('.town_part_' + $('#section').val()).css('display', 'block');
+    $('.town_part_' + $('#section').data('id')).css('display', 'block');
 
     $('#postal_code_id').val(0);
     $('#postal_code_code').val("");

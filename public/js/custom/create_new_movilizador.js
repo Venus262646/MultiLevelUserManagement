@@ -144,27 +144,26 @@ jQuery(".form-create-new-movilizador").validate({
   }
 
   function onChangeSection() {
+    $('#townhall').parent().find('button').trigger('click');
+    $('#town').parent().find('button').trigger('click');
 
-      $('#townhall').parent().find('button').trigger('click');
-      $('#town').parent().find('button').trigger('click');
+    $('.postal_code').css('display', 'none');
+    $('.postal_code_part_' + $('#section').val()).css('display', 'block');
+    $('.colonia').css('display', 'none');
+    $('.colonia_part_' + $('#section').val()).css('display', 'block');
+    $('.townhall').css('display', 'none');
+    $('.townhall_part_' + $('#section').val()).css('display', 'block');
+    $('.town').css('display', 'none');
+    $('.town_part_' + $('#section').val()).css('display', 'block');
 
-      $('.postal_code').css('display', 'none');
-      $('.postal_code_part_' + $('#section').val()).css('display', 'block');
-      $('.colonia').css('display', 'none');
-      $('.colonia_part_' + $('#section').val()).css('display', 'block');
-      $('.townhall').css('display', 'none');
-      $('.townhall_part_' + $('#section').val()).css('display', 'block');
-      $('.town').css('display', 'none');
-      $('.town_part_' + $('#section').val()).css('display', 'block');
-
-      $('#postal_code_id').val(0);
-      $('#postal_code_code').val("");
-      $('#colonia_id').val(0);
-      $('#colonia_name').val("");
-      $('#townhall').val(0);
-      $('#townhall').parent().find('div.filter-option-inner-inner').html('choose');
-      $('#town').val(0);
-      $('#town').parent().find('div.filter-option-inner-inner').html('choose');
+    $('#postal_code_id').val(0);
+    $('#postal_code_code').val("");
+    $('#colonia_id').val(0);
+    $('#colonia_name').val("");
+    $('#townhall').val(0);
+    $('#townhall').parent().find('div.filter-option-inner-inner').html('choose');
+    $('#town').val(0);
+    $('#town').parent().find('div.filter-option-inner-inner').html('choose');
   }
 
   function onChooseColonia(colonia_id, colonia_name) {
@@ -191,3 +190,13 @@ jQuery(".form-create-new-movilizador").validate({
         reader.readAsDataURL(file);
     }
 }
+
+$(document).ready(function(){
+    onChangeState();
+    $("#current_wizard").val(1);
+    onChooseColonia();
+    onChoosepostal_code();
+
+    $("#colonia_name").val($("#colonia_name").data('id'));
+    $("#postal_code_code").val($("#postal_code_code").data('id'));
+});

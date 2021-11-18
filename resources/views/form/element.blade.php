@@ -98,7 +98,7 @@
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -186,7 +186,7 @@
                 <label>Select list (select one):</label>
                 <select class="form-control default-select" id="sel1">
                   <option>1</option>
-                  <option>2</option>
+                  <option selected>2</option>
                   <option>3</option>
                   <option>4</option>
                 </select>
@@ -214,7 +214,7 @@
         <div class="card-body">
           <div class="basic-form">
             <form>
-              
+
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label>First Name</label>
@@ -697,7 +697,7 @@
                   <span class="input-group-text">@example.com</span>
                 </div>
               </div>
-              
+
               <label>Your vanity URL</label>
               <div class="input-group mb-3  input-success">
                 <div class="input-group-prepend">
@@ -705,7 +705,7 @@
                 </div>
                 <input type="text" class="form-control">
               </div>
-              
+
               <div class="input-group mb-3  input-info">
                 <div class="input-group-prepend">
                   <span class="input-group-text">$</span>
@@ -715,7 +715,7 @@
                   <span class="input-group-text">.00</span>
                 </div>
               </div>
-              
+
               <div class="input-group   input-danger">
                 <div class="input-group-prepend">
                   <span class="input-group-text">With textarea</span>
@@ -741,14 +741,14 @@
                 </div>
                 <input type="text" class="form-control">
               </div>
-              
+
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">Default</span>
                 </div>
                 <input type="text" class="form-control">
               </div>
-              
+
               <div class="input-group input-group-lg">
                 <div class="input-group-prepend">
                   <span class="input-group-text">Large</span>
@@ -776,7 +776,7 @@
                 </div>
                 <input type="text" class="form-control">
               </div>
-              
+
               <div class="input-group">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
@@ -825,7 +825,7 @@
                 </div>
                 <input type="text" class="form-control">
               </div>
-              
+
               <div class="input-group">
                 <input type="text" class="form-control">
                 <div class="input-group-append">
@@ -852,14 +852,14 @@
                 </div>
                 <input type="text" class="form-control">
               </div>
-              
+
               <div class="input-group mb-3">
                 <input type="text" class="form-control">
                 <div class="input-group-append">
                   <button class="btn btn-primary" type="button">Button</button>
                 </div>
               </div>
-              
+
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <button class="btn btn-primary" type="button">Button</button>
@@ -867,7 +867,7 @@
                 </div>
                 <input type="text" class="form-control">
               </div>
-              
+
               <div class="input-group">
                 <input type="text" class="form-control">
                 <div class="input-group-append">
@@ -901,7 +901,7 @@
                 </div>
                 <input type="text" class="form-control">
               </div>
-              
+
               <div class="input-group">
                 <input type="text" class="form-control">
                 <div class="input-group-append">
@@ -944,7 +944,7 @@
                 </div>
                 <input type="text" class="form-control">
               </div>
-              
+
               <div class="input-group">
                 <input type="text" class="form-control">
                 <div class="input-group-append">
@@ -985,7 +985,7 @@
                   <option value="3">Three</option>
                 </select>
               </div>
-              
+
               <div class="input-group mb-3">
                 <select class="default-select">
                   <option selected>Choose...</option>
@@ -997,7 +997,7 @@
                   <label class="input-group-text">Options</label>
                 </div>
               </div>
-              
+
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <button class="btn btn-primary" type="button">Button</button>
@@ -1009,7 +1009,7 @@
                   <option value="3">Three</option>
                 </select>
               </div>
-              
+
               <div class="input-group">
                 <select class="default-select">
                   <option selected>Choose...</option>
@@ -1043,7 +1043,7 @@
                   <label class="custom-file-label">Choose file</label>
                 </div>
               </div>
-              
+
               <div class="input-group mb-3">
                 <div class="custom-file">
                   <input type="file" class="custom-file-input">
@@ -1053,7 +1053,7 @@
                   <span class="input-group-text">Upload</span>
                 </div>
               </div>
-              
+
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <button class="btn btn-primary btn-sm" type="button">Button</button>
@@ -1063,14 +1063,14 @@
                   <label class="custom-file-label">Choose file</label>
                 </div>
               </div>
-              
+
               <div class="input-group">
                 <div class="custom-file">
                   <input type="file" class="custom-file-input">
                   <label class="custom-file-label">Choose file</label>
-                  
+
                 </div>
-                
+
               </div>
             </form>
           </div>

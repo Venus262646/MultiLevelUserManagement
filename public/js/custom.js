@@ -11,9 +11,23 @@ var Gymove = function(){
 	}
 
 	var handleSelectPicker = function(){
-		if(jQuery('.default-select').length > 0 ){
-			jQuery('.default-select').selectpicker();
-		}
+		//if(jQuery('.default-select').length > 0 ){
+			//jQuery('.default-select').selectpicker();
+		//}
+        var selects = $("select");
+        for (var i = 0; i < selects.length; i++ ){
+            var item = selects[i];
+            var dataid = $(item).data("id");
+            if (dataid && parseInt(dataid ) > -1 ){
+                $(item).val(dataid );
+            }
+        }
+        /*if ($("#section").length > 0 ){
+            var dataid = $("#section").data("id");
+            if (dataid && parseInt(dataid ) > -1 ){
+                $("#section").val(dataid );
+            }
+        }*/
 	}
 
 	var handleTheme = function(){
@@ -422,7 +436,7 @@ $(document).ready(function(){
 				phone_number : $("#phone_number").val()
             },
             url : "/sms-verify",
-            success: function(data) { 
+            success: function(data) {
 				if (data = "success"){
 					alert('verfied!');
 				}else{

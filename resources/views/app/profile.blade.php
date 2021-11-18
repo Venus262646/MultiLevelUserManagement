@@ -128,7 +128,7 @@
 									<div class="input-group-prepend">
 									<span class="input-group-text"> <i class="fa fa-globe"></i> </span>
 									</div>
-									<input type="text" class="form-control" name="state" value="{{ $user->detail->state->name }}" disabled >
+									<input type="text" class="form-control" name="state" value="{{ isset( $user->detail->state) ? $user->detail->state->name : ""}}" disabled >
 								</div>
 								</div>
 							</div>
@@ -139,7 +139,7 @@
 									<div class="input-group-prepend">
 									<span class="input-group-text"> <i class="fa fa-bus"></i> </span>
 									</div>
-									<input type="text" class="form-control" name="townhall" value="{{ $user->detail->townhall->name }}" disabled >
+									<input type="text" class="form-control" name="townhall" value="{{ isset($user->detail->townhall) ? $user->detail->townhall->name : ""}}" disabled >
 								</div>
 								</div>
 							</div>
@@ -150,7 +150,7 @@
 									<div class="input-group-prepend">
 									<span class="input-group-text"> <i class="fa fa-paragraph"></i> </span>
 									</div>
-									<input type="text" class="form-control" name="assigned_section" value="{{ $user->detail->assigned_electoral_sections }}" disabled >
+									<input type="text" class="form-control" name="assigned_section" value="{{ isset($user->detail->assigned_electoral_sections) ? $user->detail->assigned_electoral_sections : "" }}" disabled >
 								</div>
 								</div>
 							</div>
@@ -161,7 +161,7 @@
 									<div class="input-group-prepend">
 									<span class="input-group-text"> <i class="fa fa-columns"></i> </span>
 									</div>
-									<input type="text" class="form-control" name="section" value="{{ $user->detail->section->code }}" disabled >
+									<input type="text" class="form-control" name="section" value="{{ isset($user->detail->section) ? $user->detail->section->code : ""}}" disabled >
 								</div>
 								</div>
 							</div>
@@ -191,7 +191,7 @@
 						<?php if(Illuminate\Support\Facades\Auth::user()->level == "Call Center") {?>
 							<div class="col-lg-12 mb-2">
 								<form name="setVerified" action="{{ url('/user/setVerified') }}" method="POST" id="set_verified">
-									@csrf	
+									@csrf
 									<div class="row">
 										<div class="col-lg-6 mb-2">
 											<div class="form-group">
@@ -273,7 +273,7 @@
 								</div>
 							</div>
 						<?php }?>
-						
+
 					</div>
 				</div>
 			</div>
@@ -282,7 +282,7 @@
 	</div>
 </div>
 
-@endsection	
+@endsection
 
 @push('scripts')
 	<script>
